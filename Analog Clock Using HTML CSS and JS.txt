@@ -1,0 +1,76 @@
+<html>
+<body>
+<div class="clock">
+<div class="hand hour" id="hour-hand"></div>
+<div class="hand minute" id="minute-hand"></div>
+<div class="hand second" id="second-hand"></div>
+<div class="center-dot">
+    <style>
+        body {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+background-color: #f0f0f0;
+}
+.clock {
+width: 200px;
+height: 200px;
+border: 8px solid #333;
+border-radius: 50%;
+position: relative;
+background: #fff;
+}
+.hand {
+position: absolute;
+bottom: 50%;
+left: 50%;
+transform-origin: bottom;
+transform: translateX(-50%) rotate(0deg);
+border-radius: 5px;
+}
+.hour {
+width: 6px;
+height: 50px;
+background: #000;
+}
+.minute {
+width: 4px;
+height: 70px;
+background: #007bff;
+}
+.second {
+width: 2px;
+height: 80px;
+background: #ff0000;
+}
+.center-dot {
+width: 12px;
+height: 12px;
+background: #333;
+border-radius: 50%;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+    </style>
+</div>
+<script>
+    function updateClock() {
+const now = new Date();
+const hours = now.getHours() % 12;
+const minutes = now.getMinutes();
+const seconds = now.getSeconds();
+const hourDeg = (hours * 30) + (0.5 * minutes);
+const minuteDeg = (minutes * 6) + (0.1 * seconds);
+const secondDeg = seconds * 6;
+document.getElementById('hour-hand').style.transform = `translateX(-50%) rotate(${hourDeg}deg)`;
+document.getElementById('minute-hand').style.transform = `translateX(-50%) rotate(${minuteDeg}deg)`;
+document.getElementById('second-hand').style.transform = `translateX(-50%) rotate(${secondDeg}deg)`;
+}
+setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
